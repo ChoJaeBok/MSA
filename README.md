@@ -89,7 +89,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 }
 ```
    
-#### 2) 게임진행
+#### 3) 게임진행
  여기서는 만들어진 장애물, 아이템, 플레이어의 움직임, 점수에 따른 맵 배경 변경 및 난이도 상승등을 컨트롤 할 수 있습니다.   
 ##### (1) 장애물의 패턴과 난이도 조절
 * a) 장애물의 패턴   

@@ -330,3 +330,83 @@ public class BackGround extends  GraphicObject{
 //...
 }
 ```
+   
+#### 4) player
+플레이어는 좌,우로 만 움직일 수 있도록 설정하고 게임을 진행하는 방식으로 제작하였습니다.
+플레이어가 장애물이나 아이템과의 코드가 다른점은 움직임에 따른 코드와 충돌시에 라이프 변화에 따른 코드가 있습니다.   
+* Player.java   
+여기서는 플레이어 캐릭터에 대한 그림과, 초기 위치값, 라이프등에 대한 것이 설정 되어있습니다.
+라이프 회복을 해주는 AddLife()와 데미지를 받는 destroyPlayer() 메소드가 있습니다.
+```java
+Public class Player extends SpriteAnimation{
+    Rect m_BoundBox = new Rect();
+    int m_Life = 3;
+    public Player(Bitmap bitmap) {
+        super(bitmap);
+        // 멤버 변수를 추가할 곳
+        this.InitSpriteData(1000, 300, 10, 1);
+        // 초기 위치 값 설정
+        this.SetPosition(400, 1100);
+    }
+    public int getLife(){
+        return m_Life;
+    }
+    public void AddLife(){
+        m_Life++;
+    }
+    public void destroyPlayer(){
+        m_Life--;
+    }
+    @Override
+    public void Update(long GameTime) {
+        m_BoundBox.left = m_x;
+        m_BoundBox.top = m_y;
+        m_BoundBox.right = m_x+62;
+        m_BoundBox.bottom = m_y+104;
+    }
+}
+```   
+   
+#### 5) 충돌
+충돌이라는 것은 장애물과 플레이어, 라이프회복아이템과 플레이어 간에 발생하도록 해주는 것으로 캐릭터와 장애물, 아이템에 사각형이라는 안 보이는 틀을 그려 효과를 일으키도록 구현하였습니다.
+*  CollisionManager.java   
+이 클래스에서는 충돌 처리에 관한 로직을 담당하는 곳입니다.
+```java
+public class CollisionManager {
+    public static  boolean CheckBoxToBox(Rect _rt1, Rect _rt2) {
+        if (_rt1.right > _rt2.left && _rt1.left < _rt2.right && _rt1.top < _rt2.bottom && _rt1.bottom > _rt2.top){
+            return true;}
+            return false;
+    }
+}
+```
+* 장애물, 아이템, 플레이어에 추가.   
+```java
+Rect m_BoundBox = new Rect(); 
+```
+Enermy.java, Item.java, Player.java 각각에 추가하여 충돌 처리를 할 수 있도록 해줍니다.
+```java
+ @Override
+    public void Update(long GameTime) {
+        m_BoundBox.left = m_x;
+        m_BoundBox.top = m_y;
+        m_BoundBox.right = m_x+62;
+        m_BoundBox.bottom = m_y+104;
+    }
+```
+그리고 장애물, 아이템, 플레이어는 정적으로 있는 것이 아니므로 이와 같이 동적으로 움직여도 충돌 박스가 같이 갈 수 있도록 구현을 해주었습니다.
+
+```java
+    public void Update() {
+     // GameState.java에서 충돌 관련성 있는 명령어입니다.
+        for(Enemy enem : m_enemlist) {
+            enem.Update(GameTime);
+        }
+        for(Item item:m_itemlist){
+            item.Update(GameTime);
+        }
+        CheckCollision();
+    }
+```
+for문을 이용해서 각각의 충돌을 하였을 때 사라지도록 구현하였습니다.   
+   

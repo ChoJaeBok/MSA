@@ -283,4 +283,50 @@ GameState.java에서 장애물을 점수(시간)이나 플레이어의 생명점
             }
         }
     }
+```   
+##### (2) 아이템
+아이템에서는 두 가지로 설정하였습니다. 아이템이라고 하면 먹을 시에 라이프의 개수가 하나 증가하는 역할을 합니다.
+아이템은 장애물의 코드와 같습니다. 
+   
+#### (3) 맵
+맵은 정적인 이미지를 사용하여 스크롤이라는 효과를 줌으로서 동적인 것처럼 제작하였습니다. 
+맵은 총 두 가지로 제작하였으며 테블릿으로 디자인을 그렸습니다. 
+![map](https://user-images.githubusercontent.com/60215726/75035190-4a160f80-54f2-11ea-8451-c132204ec40a.PNG)
+ * BackGround.java   
+여기서는 스크롤의 효과와 스피드를 지정해주었습니다.
+```java
+public class BackGround extends  GraphicObject{
+    static final float SCROLL_SPEED = 30f;
+    private float m_scroll = -2000 +480;
+
+    public BackGround() {
+        super(AppManager.getInstance().getBitmap(R.drawable.rlroad));
+   
+        SetPosition(0,(int)m_scroll);
+    }
+
+    void Update(long GameTime){
+
+        m_scroll = m_scroll +SCROLL_SPEED;
+        if(m_scroll >= 0 )
+            m_scroll = -2000+480;
+        SetPosition(0, (int)m_scroll);
+
+    @Override
+    public void Draw(Canvas canvas) {
+        super.Draw(canvas);
+            canvas.drawBitmap(m_bitmap, m_x, m_y, null);
+        
+        }
+    }
+‘’‘
+맵을 그려주고 효과를 주었으니 GameState.java에서 Update() 매소드를 이용하여 지속적으로 변화를 수행시켜줍니다.
+```java
+//GameState.java
+ @Override  //지속적으로 수행할 것들
+    public void Update() {
+        m_backgroud.Update(GameTime);
+        m_background2.Update(GameTime);
+//...
+}
 ```

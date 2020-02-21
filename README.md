@@ -8,7 +8,7 @@
 ![플로우차트](https://user-images.githubusercontent.com/60215726/75009070-0c4ac400-54bd-11ea-9721-e3e0589340f4.PNG)
    
 ### 2. 코드
-####1)GameView.java
+#### 1)GameView.java
 GameView는 프레임워크로서  게임 배경에 대한 그림을 비트맵으로 그리는 부분과 게임 플레이어의 조작, gameview의 surface에 대한 스레드를 관리해주는 역할을 합니다.
 ```java
 //View를 연결하기 위한 surface생성,변경, 종료 이벤트 알려주는 인터페이스 surfaceholder: 실제 surface에 대한 작업자
@@ -89,3 +89,196 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 }
 ```
    
+#### 2) 게임진행
+ 여기서는 만들어진 장애물, 아이템, 플레이어의 움직임, 점수에 따른 맵 배경 변경 및 난이도 상승등을 컨트롤 할 수 있습니다.   
+##### (1) 장애물의 패턴과 난이도 조절
+* a) 장애물의 패턴   
+프로젝트 내에서 장애물을 나타내는 코드는 패턴을 나타내는 Enemy와 세 가지의 장애물 그림을 나타내는 Enemy_1,Enemy_2,Enemy_3으로 구성되어있습니다. 
+패턴에서는 등장하는 3가지 경로 중에 어느 곳으로 나오는 지 정해주는 m_x과 내려오는 속도를 정해주는 m_y로 존재하며 패턴은 이 두 가지로 섞어 패턴을 완성해주었습니다.
+```java
+//Enemy.java
+ void Move(){
+        if(movetype == MOVE_PATTERN_1){
+
+            if(m_y<=200){
+                m_x = 50;
+                m_y += speed; //중간지점까지 기본속도로
+            }
+            else {
+                m_y += speed*2;
+            }
+        }
+        else if(movetype == MOVE_PATTERN_2){
+
+            if(m_y<=200){
+                m_x = 380;
+                m_y += speed; //중간지점까지 기본속도로
+            }
+            else {
+                m_y += speed*5;
+            }
+        }
+        else if(movetype == MOVE_PATTERN_3){
+           //세번째
+            if(m_y<=200){
+                m_x = 700;
+                m_y += speed; //중간지점까지 기본속도로
+            }
+            else {
+                m_y += speed*5;
+            }
+        }
+        else if(movetype == MOVE_PATTERN_4){
+ 
+            m_x = 700;
+            m_y += speed*5 ; //중간지점까지 기본속도로
+        }
+        else if(movetype == MOVE_PATTERN_5){
+  
+            m_x = 50;
+            m_y += speed*2; //중간지점까지 기본속도로
+        }
+}
+```
+패턴의 개수가 본 프로젝트에는 총 13가지로 정해놓았지만 깃허브에 저장되는 것이 너무 길어지는 것을 방지하기 위해 5패턴만 업로드하였습니다.
+   
+* b) 장애물의 난이도조절   
+GameState.java에서 장애물을 점수(시간)이나 플레이어의 생명점수에 따라 저장된 장애물의 패턴을 조절을 해주는 역할을 합니다. 즉 난이도 조절을 해줍니다.
+```java
+//GameState.java 의 장애물을 만드는 코드
+    Random ranEnem = new Random();
+    Random ranmItem = new Random();
+    ArrayList<Enemy> m_enemlist = new ArrayList<Enemy>();
+    public void MakeEnemy(){
+        if (time>=1200) {
+            if (System.currentTimeMillis() - LastRegenEnemy >= 200) {
+                LastRegenEnemy = System.currentTimeMillis();
+
+                int enemtype = ranEnem.nextInt(2);
+                Enemy enem = null;
+                if (enemtype == 0) {
+                    enem = new Enemy_1();
+                } else if (enemtype == 1) {
+                    enem = new Enemy_2();
+                }
+
+                enem.SetPosition(0, -60);
+                if (m_player.getLife() > 5) {
+                    enem.movetype = ranEnem.nextInt(3);
+                } else {
+                    enem.movetype = ranEnem.nextInt(13);
+                }
+                m_enemlist.add(enem);
+            }
+        }
+        else if(time>=500){
+            if (System.currentTimeMillis() - LastRegenEnemy >= 500) {
+                LastRegenEnemy = System.currentTimeMillis();
+
+                int enemtype = ranEnem.nextInt(2);
+                Enemy enem = null;
+                if (enemtype == 0) {
+                    enem = new Enemy_1();
+                } else if (enemtype == 1) {
+                    enem = new Enemy_2();
+                }
+
+                enem.SetPosition(0, -60);
+                if (m_player.getLife() > 5) {
+                    enem.movetype = ranEnem.nextInt(3);
+                } else {
+                    enem.movetype = ranEnem.nextInt(13);
+                }
+                m_enemlist.add(enem);
+            }
+        }
+        else if(time>=200){
+            if (System.currentTimeMillis() - LastRegenEnemy >= 700) {
+                LastRegenEnemy = System.currentTimeMillis();
+
+                int enemtype = ranEnem.nextInt(2);
+                Enemy enem = null;
+                if (enemtype == 0) {
+                    enem = new Enemy_1();
+                } else if (enemtype == 1) {
+                    enem = new Enemy_2();
+                }
+
+                enem.SetPosition(0, -60);
+                if (m_player.getLife() > 5) {
+                    enem.movetype = ranEnem.nextInt(3);
+                } else {
+                    enem.movetype = ranEnem.nextInt(13);
+                }
+                m_enemlist.add(enem);
+            }
+        }
+        else if(time>=120){
+            if (System.currentTimeMillis() - LastRegenEnemy >= 1000) {
+                LastRegenEnemy = System.currentTimeMillis();
+
+
+                int enemtype = ranEnem.nextInt(2);
+                Enemy enem = null;
+                if (enemtype == 0) {
+                    enem = new Enemy_1();
+                } else if (enemtype == 1) {
+                    enem = new Enemy_2();
+                }
+
+                enem.SetPosition(0, -60);
+                if (m_player.getLife() > 5) {
+                    enem.movetype = ranEnem.nextInt(3);
+                } else {
+                    enem.movetype = ranEnem.nextInt(13);
+                }
+                m_enemlist.add(enem);
+            }
+        }
+        else if(time>=60){
+            if (System.currentTimeMillis() - LastRegenEnemy >= 1500) {
+                LastRegenEnemy = System.currentTimeMillis();
+
+
+
+                int enemtype = ranEnem.nextInt(2);
+                Enemy enem = null;
+                if (enemtype == 0) {
+                    enem = new Enemy_1();
+                } else if (enemtype == 1) {
+                    enem = new Enemy_2();
+                }
+
+                enem.SetPosition(0, -60);
+                if (m_player.getLife() > 5) {
+                    enem.movetype = ranEnem.nextInt(3);
+                } else {
+                    enem.movetype = ranEnem.nextInt(13);
+                }
+                m_enemlist.add(enem);
+            }
+        }
+        else {
+            if (System.currentTimeMillis() - LastRegenEnemy >= 2000) {
+                LastRegenEnemy = System.currentTimeMillis();
+
+
+                int enemtype = ranEnem.nextInt(2);
+                Enemy enem = null;
+                if (enemtype == 0) {
+                    enem = new Enemy_1();
+                } else if (enemtype == 1) {
+                    enem = new Enemy_2();
+                }
+
+                enem.SetPosition(0, -60);
+                if (m_player.getLife() > 5) {
+                    enem.movetype = ranEnem.nextInt(3);
+                } else {
+                    enem.movetype = ranEnem.nextInt(13);
+                }
+                m_enemlist.add(enem);
+            }
+        }
+    }
+```

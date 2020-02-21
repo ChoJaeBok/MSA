@@ -274,8 +274,10 @@ GameState.java에서 장애물을 점수(시간)이나 플레이어의 생명점
                 enem.SetPosition(0, -60);
                 if (m_player.getLife() > 5) {
                     enem.movetype = ranEnem.nextInt(3);
+                    //여기서는 장애물의 종류가 3가지이므로 3가지 중 랜덤으로 장애물이 나오도록 설정하는 곳입니다.
                 } else {
                     enem.movetype = ranEnem.nextInt(13);
+                    //여기서는 장애물의 패턴의 종류가 13가지 중 랜덤으로 패턴을 정하는 곳입니다.
                 }
                 m_enemlist.add(enem);
             }

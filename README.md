@@ -460,3 +460,5 @@ Enermy.java, Item.java, Player.java 각각에 추가하여 충돌 처리를 할 
 ```
 for문을 이용해서 각각의 충돌을 하였을 때 사라지도록 구현하였습니다.   
    
+### 3. 메인 및 게임 실행 화면
+![ima](https://user-images.githubusercontent.com/60215726/75088558-581b6d00-5592-11ea-9433-52934e59f59e.PNG)

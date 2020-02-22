@@ -26,7 +26,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     protected void onDraw(Canvas canvas) {
 //        super.onDraw(canvas);
         //작동 여부 확인용 그림
-        Bitmap _scratch = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Bitmap _scratch = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);//Jpeg 사진데이터를 가지고 Bitmap  으로 만들어 줄 때 많이 사용한다.
 //        canvas.drawColor(Color.RED);//배경
         //canvas.drawBitmap(_scratch,10,10,null);
         m_state.Render(canvas);

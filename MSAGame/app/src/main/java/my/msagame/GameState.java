@@ -49,7 +49,7 @@ public class GameState implements IState {
 
 
     long LastRegenEnemy = System.currentTimeMillis();// 시간이 조금씩 흐를 때마다 적이 등장
-    long LastRegenItem = System.currentTimeMillis();//시간이 조금씩 흐를 때마다 적이 등장
+    long LastRegenItem = System.currentTimeMillis();//시간이 조금씩 흐를 때마다 아이템이 등장
 
     public static GameState getInstance(){
         if(s_instance == null){
@@ -63,11 +63,6 @@ public class GameState implements IState {
             if (System.currentTimeMillis() - LastRegenEnemy >= 200) {
                 LastRegenEnemy = System.currentTimeMillis();
 
-//            Enemy enem = new Enemy_2();
-//            enem.SetPosition(ranEnem.nextInt(50),-60);
-//            //enem.SetPosition(0,-60);
-//
-//            enem.movetype = ranEnem.nextInt(3);
 
                 int enemtype = ranEnem.nextInt(2);
                 Enemy enem = null;
@@ -76,9 +71,7 @@ public class GameState implements IState {
                 } else if (enemtype == 1) {
                     enem = new Enemy_2();
                 }
-//            else if(enemtype==3){
-//                enem = new Enemy_3();
-//            }
+
                 enem.SetPosition(0, -60);
                 if (m_player.getLife() > 5) {
                     enem.movetype = ranEnem.nextInt(3);
@@ -92,11 +85,6 @@ public class GameState implements IState {
             if (System.currentTimeMillis() - LastRegenEnemy >= 500) {
                 LastRegenEnemy = System.currentTimeMillis();
 
-//            Enemy enem = new Enemy_2();
-//            enem.SetPosition(ranEnem.nextInt(50),-60);
-//            //enem.SetPosition(0,-60);
-//
-//            enem.movetype = ranEnem.nextInt(3);
 
                 int enemtype = ranEnem.nextInt(2);
                 Enemy enem = null;
@@ -105,9 +93,7 @@ public class GameState implements IState {
                 } else if (enemtype == 1) {
                     enem = new Enemy_2();
                 }
-//            else if(enemtype==3){
-//                enem = new Enemy_3();
-//            }
+
                 enem.SetPosition(0, -60);
                 if (m_player.getLife() > 5) {
                     enem.movetype = ranEnem.nextInt(3);
@@ -121,12 +107,6 @@ public class GameState implements IState {
             if (System.currentTimeMillis() - LastRegenEnemy >= 700) {
                 LastRegenEnemy = System.currentTimeMillis();
 
-//            Enemy enem = new Enemy_2();
-//            enem.SetPosition(ranEnem.nextInt(50),-60);
-//            //enem.SetPosition(0,-60);
-//
-//            enem.movetype = ranEnem.nextInt(3);
-
                 int enemtype = ranEnem.nextInt(2);
                 Enemy enem = null;
                 if (enemtype == 0) {
@@ -134,9 +114,7 @@ public class GameState implements IState {
                 } else if (enemtype == 1) {
                     enem = new Enemy_2();
                 }
-//            else if(enemtype==3){
-//                enem = new Enemy_3();
-//            }
+
                 enem.SetPosition(0, -60);
                 if (m_player.getLife() > 5) {
                     enem.movetype = ranEnem.nextInt(3);
@@ -150,11 +128,6 @@ public class GameState implements IState {
             if (System.currentTimeMillis() - LastRegenEnemy >= 1000) {
                 LastRegenEnemy = System.currentTimeMillis();
 
-//            Enemy enem = new Enemy_2();
-//            enem.SetPosition(ranEnem.nextInt(50),-60);
-//            //enem.SetPosition(0,-60);
-//
-//            enem.movetype = ranEnem.nextInt(3);
 
                 int enemtype = ranEnem.nextInt(2);
                 Enemy enem = null;
@@ -163,9 +136,7 @@ public class GameState implements IState {
                 } else if (enemtype == 1) {
                     enem = new Enemy_2();
                 }
-//            else if(enemtype==3){
-//                enem = new Enemy_3();
-//            }
+
                 enem.SetPosition(0, -60);
                 if (m_player.getLife() > 5) {
                     enem.movetype = ranEnem.nextInt(3);
@@ -179,12 +150,6 @@ public class GameState implements IState {
             if (System.currentTimeMillis() - LastRegenEnemy >= 1500) {
                 LastRegenEnemy = System.currentTimeMillis();
 
-//            Enemy enem = new Enemy_2();
-//            enem.SetPosition(ranEnem.nextInt(50),-60);
-//            //enem.SetPosition(0,-60);
-//
-//            enem.movetype = ranEnem.nextInt(3);
-
                 int enemtype = ranEnem.nextInt(2);
                 Enemy enem = null;
                 if (enemtype == 0) {
@@ -192,9 +157,7 @@ public class GameState implements IState {
                 } else if (enemtype == 1) {
                     enem = new Enemy_2();
                 }
-//            else if(enemtype==3){
-//                enem = new Enemy_3();
-//            }
+
                 enem.SetPosition(0, -60);
                 if (m_player.getLife() > 5) {
                     enem.movetype = ranEnem.nextInt(3);
@@ -208,11 +171,6 @@ public class GameState implements IState {
             if (System.currentTimeMillis() - LastRegenEnemy >= 2000) {
                 LastRegenEnemy = System.currentTimeMillis();
 
-//            Enemy enem = new Enemy_2();
-//            enem.SetPosition(ranEnem.nextInt(50),-60);
-//            //enem.SetPosition(0,-60);
-//
-//            enem.movetype = ranEnem.nextInt(3);
 
                 int enemtype = ranEnem.nextInt(2);
                 Enemy enem = null;
@@ -221,9 +179,7 @@ public class GameState implements IState {
                 } else if (enemtype == 1) {
                     enem = new Enemy_2();
                 }
-//            else if(enemtype==3){
-//                enem = new Enemy_3();
-//            }
+
                 enem.SetPosition(0, -60);
                 if (m_player.getLife() > 5) {
                     enem.movetype = ranEnem.nextInt(3);

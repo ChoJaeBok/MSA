@@ -23,7 +23,7 @@ public class Enemy extends SpriteAnimation {
 
 
     protected int movetype;
-    Rect m_BoundBox = new Rect();
+    Rect m_BoundBox = new Rect();//충돌박스
 
 
 
@@ -64,53 +64,53 @@ public class Enemy extends SpriteAnimation {
             }
         }
         else if(movetype == MOVE_PATTERN_4){
-            //세번째
+
             m_x = 700;
             m_y += speed*5 ; //중간지점까지 기본속도로
         }
         else if(movetype == MOVE_PATTERN_5){
-            //세번째
+
             m_x = 50;
             m_y += speed*2; //중간지점까지 기본속도로
         }
         else if(movetype == MOVE_PATTERN_6){
-            //세번째
+
             m_x = 380;
             m_y += speed*2; //중간지점까지 기본속도로
         }
         else if(movetype == MOVE_PATTERN_7){
-            //세번째
+
             m_x = 700;
             m_y += speed*3; //중간지점까지 기본속도로
         }
         else if(movetype == MOVE_PATTERN_8){
-            //세번째
+
             m_x = 700;
             m_y = 10000; //중간지점까지 기본속도로
         }
         else if(movetype == MOVE_PATTERN_9){
-            //세번째
+
             m_x = 380;
             m_y += speed*3; //중간지점까지 기본속도로
         }
         else if(movetype == MOVE_PATTERN_10){
-            //세번째
+
             m_x = 50;
             m_y += speed*3; //중간지점까지 기본속도로
         }
 
         else if(movetype == MOVE_PATTERN_11){
-            //세번째
+
             m_x = 700;
             m_y = 10000; //중간지점까지 기본속도로
         }
         else if(movetype == MOVE_PATTERN_12){
-            //세번째
+
             m_x = 700;
             m_y += speed*2; //중간지점까지 기본속도로
         }
         else if(movetype == MOVE_PATTERN_13){
-            //세번째
+
             m_x = 700;
             m_y = 10000; //중간지점까지 기본속도로
         }

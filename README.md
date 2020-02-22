@@ -235,8 +235,43 @@ public class SpriteAnimation extends GraphicObject{
     }
 }
 ```
+#### 6)AppManager.java
+프레임 워크를 관리하는 매니저 클래스로서 프레임워크를 사용하는 애플리케이션을 관리합니다.
+또한 게임뷰와 리소스 접근을 위해서만 사용, 추후에 상용 수준의 게임을 만든다면 여기 클래스에 애플리케이션 실행정보나 여러 가지 정보를 관리하는 기능을 추가할 수 있습니다.
+```java
+public class AppManager {
+    private static AppManager s_instance;
+    public static Object setActivity;
+    private  GameView m_gameview;
+    private Resources m_resources;
+    private Activity activity;
 
-#### 6) 게임진행
+    void setGameView(GameView _gameview){
+        m_gameview = _gameview;
+    }
+    void  setResources(Resources _resources){
+        m_resources = _resources;
+    }
+    public GameView getGameView(){
+        return m_gameview;
+    }
+    public Resources getResources(){
+        return m_resources;
+    }
+    public static AppManager getInstance(){
+        if (s_instance ==null){
+            s_instance = new AppManager();
+        }
+        return s_instance;
+    }
+
+    public Bitmap getBitmap(int r){
+        return BitmapFactory.decodeResource(m_resources,r);
+    }
+}
+```
+   
+#### 7) 게임진행
  여기서는 만들어진 장애물, 아이템, 플레이어의 움직임, 점수에 따른 맵 배경 변경 및 난이도 상승등을 컨트롤 할 수 있습니다.   
  사용된 클래스로는 GameState, CollsionManager, Enemy, Item, Player 입니다.
 #####  (1) 장애물의 패턴과 난이도 조절   
